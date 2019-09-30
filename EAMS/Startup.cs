@@ -9,6 +9,8 @@ namespace EAMS
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            //changed by ajay
+            //changed by Ankit
         }
     }
 }
