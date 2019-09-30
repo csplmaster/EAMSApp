@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EAMS.View_Models.PBORsponserDetailsIndxVM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <h3 style="text-align:center"><strong><span style="text-decoration:underline"> NO. OF ESM JCOs/OR SPONSORED</span></strong></h3>
+            <h3 style="text-align:center"><strong><span style="text-decoration:underline">(WEEKLY DATA )</span></strong></h3>
+            <br />
+            <p style="text-align:center">From :____________________________	To: ______________________________</p>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Name of the Organisation</th>
+                            <th>No. of Vacancies</th>
+                            <th>No. of ESM Sponsored</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SponsorshipId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Companies.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalVacancy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalESMSponsered)
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="2"><strong>Total</strong></td>
+                            <td>@Model.Sum(i => i.TotalVacancy)</td>
+                            <td>@Model.Sum(i => i.TotalESMSponsered)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EAMS.View_Models.ESMJcoIndexVM>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <h3 style="text-align:right">File No. 0515/NAC/DGR/Emp-3/@DateTime.Now.Year</h3>
+
+            <p>1.	 The following vacancies have been received from the various organization (PUC):-</p>
+
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Service No., Rank & name</th>
+                            <th>DGR Regn no.</th>
+                            <th>Reg for Scheme</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EsmId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceNo),&nbsp;@Html.DisplayFor(modelItem => item.Ranks.RankName),&nbsp;
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DgrRegistrationNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <p>2.    The above mentioned vacancies were uploaded on the DGR website for wide publicity on and was also forwarded to all the Rajya Sainik Boards. However, no feedback has been received.</p>
+
+            <p>3.    Now, the above said four organizations have requested for issuance of NAC. Hence, it is suggested that NAC may be issued with the condition that when this vacancy is advertised through various local dailies, employment newspaper or circulated through other channels, a specific mention of reservation of 10% and 20% in respect of Group C and Group D respectively for Ex Servicemen, may be made in accordance with DOP&T GSR 757 (E) dated 04 Oct 2012</p>
+
+            <p>4.    Draft NAC is placed opposite for perusal and approval please.</p>
+            <p style="text-align:right">(कल्पना मिश्रा) <br />उप निदेशक /रोज़गार-III <br />@DateTime.Now.ToShortDateString()</p>
+            <br />
+            <br />
+            <br />
+            <p>पी.डी</p>
+            <br />
+            <br />
+            <br />
+            <p style="font-style:unset">डी.जी.आर</p>
+        </div>
+    </div>
+</div>
+
+

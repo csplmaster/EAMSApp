@@ -1,0 +1,141 @@
+﻿@model IEnumerable<EAMS.View_Models.EmployerDetailsIndxVM>
+
+@{
+    ViewBag.Title = "List of Comapany Branch/Location";
+}
+<div class="page-body">
+    <div class="card">
+        <div class="card-header">
+            <h5>@ViewBag.Title</h5>
+            <div class="card-header-right">
+                <i class="icofont icofont-rounded-down"></i>
+                <a href="@Url.Action("Create", "EmployerDetails")" title="Click here to create a New Vacancy"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered w-100" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Citys.CityName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Companys.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.States.StateName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Branch)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BranchCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonDesignation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonContact)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonEmailId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PinCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FullAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FaxNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNo)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Citys.CityName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Companys.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.States.StateName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Branch)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BranchCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PersonName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PersonDesignation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PersonContact)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PersonEmailId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PinCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FaxNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNo)
+                            </td>
+                            <td>
+                                @*@Html.EncodedActionLink("<i class='fa fa-pencil fa-lg'></i>", "Edit", "EmployerDetails", new { id = item.EmployerId }, new { @class = "btn btn-primary btn-sm" })*@
+                                <a href="@Url.Action("Edit", "EmployerDetails", new { id = item.EmployerId })"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="Delete(@item.EmployerId, this)"><i class="fa fa-trash fa-lg"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        LoadJDT('myTable');
+
+        function Delete(id, event) {
+            var TableId = "myTable";
+            var Jsonurl = "/EmployerDetails/DeleteOnConfirm";
+            DeleteJDTRow(id, event, TableId, Jsonurl)
+        }
+    </script>
+}
+
+

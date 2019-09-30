@@ -1,0 +1,150 @@
+﻿@*@model IEnumerable<EAMS.View_Models.MonthlySponsershipOffrsRptVm>*@
+@using EAMS.View_Models
+
+@{
+    ViewBag.Title = "Sponsorship Details for Officers to Various Organisations";
+    var edt = ViewData.Model;
+    //var cntryList = ViewBag.CountryData as List<SelectListItem>;
+}
+
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page body start -->
+        <div class="page-body">
+            <!-- Container-fluid starts -->
+            <div class="container">
+                <!-- Filter Controls -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>@ViewBag.Title</h5>
+                        <div class="card-header-right">
+                            <a href="@Url.Action("Index", "Home")" title="Click here to close this form"><i class="icofont icofont-home"></i></a>
+                            <i class="icofont icofont-rounded-down"></i>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class='form-group row'>
+                            <label for="txtmonth" class="col-md-2 col-form-label">Select Month</label>
+                            <div class="col-md-2">
+                                <input type="text" id="txtmonth" name="MonthYear" class="monthPicker form-control" autocomplete="off" />
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" class="btn btn-primary btn-sm">Ok</button>
+                                <div class='form-group pull-right'>
+                                    <button type="button" class="btn btn-primary btn-sm"> Print</button>
+                                    <button type="button" class="btn btn-danger btn-sm"> Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Filter Controls -->
+                 <div class="card">
+                    <div class="row invoice-contact">
+
+
+                        <div class="col-md-4">
+                            <div class="row text-center">
+                                <div class="col-sm-12 invoice-btn-group">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary list-panel" id="list-panel">
+                                    <h3 style="text-align:center">SPONSORSHIP DETAILS FOR OFFICERS TO VARIOUS ORGANISATIONS MONTH:</h3>
+                                    @{
+                                                    int a = 0;
+                                                    
+                                                    foreach (var cItem in ViewBag.Companies)
+                                                    {
+                                            <p>@Html.Raw(++a) .   Name of the Organisation:<b>@cItem.CompanyName</b></p>
+
+
+                                            foreach (var vItem in ViewBag.Vacancies)
+                                                        {
+                                                            if (vItem.CompanyId == cItem.CompanyId)
+                                                            {
+                                                    <div>
+                                                        <p>     Post:<b>@vItem.PostName</b></p>
+
+                                                        <div class="panel-body">
+                                                            <table class="table table-bordered" style="border:thick">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Ser No</th>
+                                                                        <th>Service No., Rank & name</th>
+                                                                        <th>RSB/ZSB</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                                                        int b = 0;
+                                                                        foreach (var eItem in ViewBag.Esmdatas)
+                                                                        {
+                                                                            if (eItem.VacancyId == vItem.VacancyId && eItem.CompanyId == cItem.CompanyId)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>@Html.Raw(++b)</td>
+                                                                                    <td>@eItem.ServiceNo  @eItem.Ranks.RankName    @eItem.Name</td>
+                                                                                    <td>@eItem.sainiks.Sbname</td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".monthPicker").datepicker({
+                dateFormat: 'mm-yy',
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+
+                onClose: function (dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('M-yy', new Date(year, month, 1)));
+                }
+            });
+
+            $(".monthPicker").focus(function () {
+                $(".ui-datepicker-calendar").hide();
+                $("#ui-datepicker-div").position({
+                    my: "center top",
+                    at: "center bottom",
+                    of: $(this)
+                });
+            });
+
+        });
+    </script>
+}

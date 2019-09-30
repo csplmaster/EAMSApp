@@ -1,0 +1,165 @@
+﻿@model EAMS.View_Models.NotingCreateVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>NotingIndexVM</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
+                <a class="btn btn-info" href="@Url.Action("Index", "NotingDetails")"><i class="fa fa-file"></i>View All</a>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyId, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+            </div>
+        </div>        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VacancyId, "Vacancy", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VacancyId", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VacancyId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.LetterNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LetterNo, new { htmlAttributes = new { placeholder = "Letter No", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LetterNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LetterDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LetterDate, new { htmlAttributes = new { placeholder="Letter Date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LetterDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { placeholder = "Remarks", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered w-100" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                           @Html.CheckBox("isPreferred", false) Select
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Rank
+                        </th>
+                        <th>Service No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.CheckBox("isPreferred", false)</td>
+                        <td>Name</td>
+                        <td>Rank</td>
+                        <td>ServiceNO</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.CheckBox("isPreferred", false)</td>
+                        <td>Name</td>
+                        <td>Rank</td>
+                        <td>ServiceNO</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.CheckBox("isPreferred", false)</td>
+                        <td>Name</td>
+                        <td>Rank</td>
+                        <td>ServiceNO</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.CheckBox("isPreferred", false)</td>
+                        <td>Name</td>
+                        <td>Rank</td>
+                        <td>ServiceNO</td>
+                    </tr>
+
+                   @* @foreach (var item in modrl)
+    {
+        <tr>
+            <td>
+                @Html.CheckBoxFor("IsChecked",true)
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>*@
+                              @*  @Html.EncodedActionLink("<i class='fa fa-edit'></i>", "Edit", "CityMaster", new { id = item.CityId }, null)*@
+                              @* <a href="@Url.Action("Edit", "CityMaster", new { id = item.CityId })"><i class="fa fa-edit"></i></a>
+    <button type="button" class="btn btn-transparent red btn-xs" onclick="Delete(@item.CityId, this)"><i class="fa fa-trash"></i></button>*@
+                               @* </td>
+        </tr>
+    }*@
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
+                    <a class="btn btn-info" href="@Url.Action("Index", "NotingDetails")"><i class="fa fa-file"></i>View All</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#CompanyId").change(function () {
+                    $("#VacancyId").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetJobPosts")',
+                        dataType: 'json',
+                        data: { companyid: $("#CompanyId").val() },
+                        success: function (jobpostsdata) {
+                            //$("#CityId").append('<option value="' + "0" + '">' + "Select" + '</option>');
+                            $.each(jobpostsdata, function (i, posts) {
+                                $("#VacancyId").append('<option value="' + posts.Value + '">' + posts.Text + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve Job Posts Data.' + ex);
+                        }
+                    });
+                    return false;
+                })
+            });
+    </script>
+    }

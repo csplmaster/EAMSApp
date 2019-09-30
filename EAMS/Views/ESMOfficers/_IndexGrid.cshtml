@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EAMS.View_Models.ESMDetailsIndexVM>
+@using NonFactors.Mvc.Grid
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.CompanyId).Titled("Comapny").Sortable(true);
+        columns.Add(model => model.PostName).Titled("Post");
+        columns.Add(model => model.ServiceNo).Titled("Service");
+        columns.Add(model => model.RankID).Titled("Rank");
+        columns.Add()
+        .Titled("Edit")
+        .RenderedAs(o => Html.ActionLink("Edit", "Edit", new { id = o.EsmId }));
+        columns.Add()
+        .Titled("Delete")
+        .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.EsmId }));
+    })
+    .UsingFilterMode(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 2;
+        pager.RowsPerPage = 10;
+    })
+    .Filterable()
+    .Sortable()
+)

@@ -1,0 +1,179 @@
+﻿@model EAMS.View_Models.OutcomeDataCreateVM
+
+@{
+    ViewBag.Title = "Sponsorship Outcome";
+}
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to capture outcome of the sponsorship</span>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "OutcomeDetails")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class='col-sm-4'>
+                            <div class='form-group'>
+                                <label class="control-label">Company</label>
+                                @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class='col-sm-4'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.VacancyId, "Post", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("VacancyId", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.VacancyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Candidate</label>
+                                @Html.DropDownList("EsmId", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EsmId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Selected for Job?</label>
+                                <div class='form-group'>
+                                    @Html.RadioButtonFor(model => model.IsSelected, "Y") Yes
+                                    @Html.RadioButtonFor(model => model.IsSelected, "N") No
+                                    @Html.ValidationMessageFor(model => model.IsSelected, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Attended the Interview?</label>
+                                <div class='form-group'>
+                                    @Html.RadioButtonFor(model => model.InterviewAttend, "Y") Yes
+                                    @Html.RadioButtonFor(model => model.InterviewAttend, "N") No
+                                    @Html.ValidationMessageFor(model => model.InterviewAttend, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Joining Date</label>
+                                @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-12'>
+                            <div class="table-responsive-lg">
+                                <table class="table table-bordered" id="tblPerson">
+                                    <thead class="thead-success">
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" value="All" id="chkAll" checked />
+                                            </th>
+                                            <th>Service No</th>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Date of Birth</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                    <button type="submit" value="Save" class="btn btn-primary m-b-0"><i class="fa fa-save"></i> Save </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CompanyId").change(function () {
+                $("#VacancyId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetJobPosts")',
+                    dataType: 'json',
+                    data: { companyid: $("#CompanyId").val() },
+                    success: function (jobpostsdata) {
+                        //$("#CityId").append('<option value="' + "0" + '">' + "Select" + '</option>');
+                        $.each(jobpostsdata, function (i, posts) {
+                            $("#VacancyId").append('<option value="' + posts.Value + '">' + posts.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Job Posts Data.' + ex);
+                    }
+                });
+                return false;
+            });
+            fnPopPersons();
+        });
+        function PopPerson() {
+            $("#VacancyId").change(function () {
+                $("#EsmId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetEamsDatas")',
+                    dataType: 'json',
+                    data: { VacancyId: $("#VacancyId").val() },
+                    success: function (Eamsdata) {
+                        $.each(Eamsdata, function (i, Eams) {
+                            $("#EsmId").append('<option value="' + Eams.Value + '">' + Eams.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Job Posts Data.' + ex);
+                    }
+                });
+                return false;
+            });
+        }
+        function fnPopPersons() {
+            $("#mydrop").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetEAMSDetail")',
+                dataType: 'json',
+                data: { vacancyId: $("#VacancyId").val() },
+                success: function (esmdata) {
+                    var tablesTb = $('#tblPerson tbody');;
+                    tablesTb.empty();
+                    $.each(esmdata, function (i, esm) {
+                        var date = new Date(parseInt(esm.DateofBirth.substr(6)));
+                        var dob = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                        tablesTb.append('<tr><td> <input type="checkbox" name="SelChkEsmIds" id="chkEsmId" value = "' + esm.EsmId + '" checked /></td><td>' + esm.ServiceNo + '</td><td> Maj </td><td>' + esm.Name + '</td><td>' + dob + '</td></tr>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve EAMS Data.' + ex);
+                }
+            });
+        }
+
+    </script>
+}

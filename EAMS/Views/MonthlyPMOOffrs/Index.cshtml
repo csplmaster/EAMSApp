@@ -1,0 +1,124 @@
+﻿
+@using EAMS.View_Models
+@{
+    ViewBag.Title = "Monthly PMO Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var student = ViewData.Model;
+    var MonPmoData = ViewBag.MonPmoData;
+}
+
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page body start -->
+        <div class="page-body">
+            <!-- Container-fluid starts -->
+            <div class="container">
+                <!-- Filter Controls -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>@ViewBag.Title</h5>
+                        <div class="card-header-right">
+                            <a href="@Url.Action("Index", "Home")" title="Click here to close this form"><i class="icofont icofont-home"></i></a>
+                            <i class="icofont icofont-rounded-down"></i>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class='form-group row'>
+                            <div class="col-md-2">
+                                <label for="fromDate" class="form-label">From Date</label>
+                                <input type="text" id="fromDate" name="fdate" class="monthPicker form-control" autocomplete="off" />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="toDate" class="form-label">To Date</label>
+                                <input type="text" id="toDate" name="tdate" class="monthPicker form-control" autocomplete="off" />
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary">Ok</button>
+                                </div>
+                            </div>
+                                <div class="col-md-6">
+
+                                    <div class='form-group pull-right'>
+                                        <button type="button" class="btn btn-primary btn-sm"> Print</button>
+                                        <button type="button" class="btn btn-danger btn-sm"> Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="card">
+                    <div class="row invoice-contact">
+
+
+                        <div class="col-md-4">
+                            <div class="row text-center">
+                                <div class="col-sm-12 invoice-btn-group">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary list-panel" id="list-panel">
+                                    <h3 style="text-align:center">NO. OF ESM OFFICERS SPONSORED</h3>
+                                    <h3 style="text-align:center">(PMO THRUST DATA)</h3>
+                                    <br />
+                                    <br />
+                                    <p style="text-align:center">From : @ViewBag.Fdate	To: @ViewBag.Tdate</p>
+                                    <br />
+
+                                    <p>No. of ESM Sposnored in Govt Sector: @MonPmoData.EsmSponsoredGovt</p>
+
+                                    <p>No. of ESm Sponsored in Private Sector: @MonPmoData.EsmSponsoredPvt</p>
+
+                                    <p>Total No. of ESM Sponsored: @MonPmoData.EsmSponsored</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+           </div>
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".monthPicker").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeDay: true,
+                changeMonth: true,
+                changeYear: true,
+                editable: true,
+                showButtonPanel: true,
+
+                onClose: function (dateText, inst) {
+                    var day = $("#ui-datepicker-div .ui-datepicker-day :selected").val();
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('dd-M-yy', new Date(year, month, d)));
+                }
+            });
+
+            $(".monthPicker").focus(function () {
+                //$(".ui-datepicker-calendar").hide();
+                $("#ui-datepicker-div").position({
+                    my: "center top",
+                    at: "center bottom",
+                    of: $(this)
+                });
+            });
+
+        });
+    </script>
+}
+
+

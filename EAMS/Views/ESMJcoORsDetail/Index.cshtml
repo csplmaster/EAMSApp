@@ -1,0 +1,75 @@
+﻿@model IEnumerable<EAMS.View_Models.ESMJcoIndexVM>
+
+@{
+    ViewBag.Title = "JCOs/OR Vacancy Entry";
+}
+<div class="page-body">
+    <div class="card">
+        <div class="card-header">
+            <h5>@ViewBag.Title</h5>
+            <div class="card-header-right">
+                <i class="icofont icofont-rounded-down"></i>
+                <a href="@Url.Action("Create", "ESMJcoORsDetail")" title="Click here to create a New Vacancy"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered w-100" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Post Name</th>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Corps</th>
+                        <th>Address</th>
+                        <th>ContactNo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Companys.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vacancys.PostName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ranks.RankName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Corps)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactNo)
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "ESMJcoORsDetail", new { id = item.EsmId })"><i class="fa fa-pencil fa-lg"></i></a>
+                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "ESMJcoORsDetail", new { id = item.EsmId })"><i class="fa fa-trash fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "scrollX": true
+            });
+        });
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<EAMS.View_Models.SponsorDataIndexVM>
+
+@{
+    ViewBag.Title = "Sponsorship List";
+}
+<div class="page-body">
+    <div class="card">
+        <div class="card-header">
+            <h5>@ViewBag.Title</h5>
+            <div class="card-header-right">
+                <i class="icofont icofont-rounded-down"></i>
+                <a href="@Url.Action("Create", "SponsorDataDetails")" title="Click here to create a New Vacancy"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered w-100" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PanelNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Companys.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vacancys.PostName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NoofVacancy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NoofEAMSSponsor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SponsorShipDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Feedback)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsNACIssued)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Remarks)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(item.PersonType == "O" ? "Officer" : "JCO/ORs")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PanelNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Companys.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vacancys.PostName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoofVacancy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoofEAMSSponsor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SponsorShipDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Feedback)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsNACIssued)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remarks)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "SponsorDataDetails", new { id = item.SponsorId })"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-transparent red btn-xs" onclick="Delete(@item.SponsorId, this)"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        LoadJDT('myTable');
+
+        function Delete(id, event) {
+            var TableId = "myTable";
+            var Jsonurl = "/SponsorDataDetails/DeleteOnConfirm";
+            DeleteJDTRow(id, event, TableId, Jsonurl)
+        }
+    </script>
+}

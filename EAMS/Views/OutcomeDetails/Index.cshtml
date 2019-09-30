@@ -1,0 +1,84 @@
+﻿@model IEnumerable<EAMS.View_Models.OutcomeDataIndexVM>
+
+@{
+    ViewBag.Title = "Sponsorship Outcome Details";
+}
+
+<div class="page-body">
+    <div class="card">
+        <div class="card-header">
+            <h5>@ViewBag.Title</h5>
+            <div class="card-header-right">
+                <i class="icofont icofont-rounded-down"></i>
+                <a href="@Url.Action("Create", "OutcomeDetails")" title="Click here to create a New Vacancy"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered w-100" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                           Company Name
+                        </th>
+                        <th>
+                           Post Name
+                        </th>
+                        <th>
+                            Name of Candidate
+                        </th>
+                        <th>
+                            Selection Done
+                        </th>
+                        <th>
+                            Interviewed
+                        </th>
+                        <th>
+                            Join Date
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Companys.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vacancys.PostName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Officers.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsSelected)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InterviewAttend)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JoinDate)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "OutcomeDetails", new { id = item.OutcomeId })"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-transparent red btn-xs" onclick="Delete(@item.OutcomeId, this)"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section DataTableScript {
+    <script>
+        LoadJDT('myTable');
+
+        function Delete(id, event) {
+            var TableId = "myTable";
+            var Jsonurl = "/OutcomeDetails/DeleteOnConfirm";
+            DeleteJDTRow(id, event, TableId, Jsonurl)
+        }
+    </script>
+}

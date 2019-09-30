@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EAMS.View_Models.CompanyMasterIndexVM>
+@using NonFactors.Mvc.Grid
+
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.CompanyName).Titled("Company");
+            columns.Add(model => model.CompanyType).Titled("Company Type");
+            columns.Add()
+            .Titled("Edit")
+            .RenderedAs(o => Html.ActionLink("Edit", "Edit", new { id = o.CompanyId }));
+            columns.Add()
+            .Titled("Delete")
+            .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.CompanyId }));
+            columns.Add()
+            .Titled("Dele2")
+            .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.CompanyId }, new { onclick = "return confirm('Are you sure you wish to delete this record?');" }));
+        })
+        .UsingFilterMode(GridFilterMode.Excel)
+        .Empty("No data found")
+        .Id("my-ajax-grid")
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 2;
+            pager.RowsPerPage = 10;
+        })
+        .Filterable()
+        .Sortable()
+)

@@ -1,0 +1,96 @@
+﻿@model EAMS.View_Models.ESMJcoORsDetailVM
+@{
+    ViewBag.Title = "GetSponsordata";
+}
+
+<h2>Sponsor Entry</h2>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to Add City and Districts</span>
+                    @*<div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "CityMaster")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>*@
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CompanyId, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @*@Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })*@
+                                        @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                                    </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PostName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.PostName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PostName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-block">
+                                <table class="table table-striped table-bordered w-100" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.ServiceNo)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Ranks)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Name)
+                                            </th>
+                                            <th>DGR Registration No</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@Html.CheckBox("isChecked", true)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ServiceNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Ranks)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => "")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => "")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => "")
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

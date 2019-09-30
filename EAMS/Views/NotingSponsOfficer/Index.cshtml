@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EAMS.View_Models.ESMOfficersDetailVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <h3 style="text-align:right">File No. 0515/DGR/Emp-3/Panel No./@DateTime.Now.Year</h3>
+
+            <p>1.	 Reference Encl. (PUC)</p>
+
+            <p>2.	A requisition has been received from <strong>(ORGANISATION NAME)</strong> for the post of <strong>(POST NAME)</strong> vide their office letter No. ______________________ dated _________. </p>
+
+            <p>3.	The vacancy was published on the DGR website for wide publicity. All the willing Ex-Servicemen with the requisite qualification were requested to apply for the said post within the stipulated time period. </p>
+
+            <p>4.	The details of the willing Ex-Servicemen Officer(s) for the above mentioned post is given below:-</p>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Service No., Rank & name</th>
+                            <th>DGR Regn no.</th>
+                            <th>Reg for Scheme</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EsmId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceNo),&nbsp;@Html.DisplayFor(modelItem => item.Ranks.RankName),&nbsp;
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DgrRegistrationNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <p>5.    It is recommended that the name of <strong>(total No. of candidates)</strong> willing officer mentioned at Para 4 above may be forwarded to <strong>(ORGANISATION NAME)</strong> for further selection. </p>
+
+            <p>6.	Put up for approval please.</p>
+
+            <p style="text-align:right">(कल्पना मिश्रा) <br />उप निदेशक /रोज़गार-III <br />@DateTime.Now.ToShortDateString()</p>
+            <br />
+            <br />
+            <br />
+            <p>पी.डी</p>
+            <br />
+            <br />
+            <br />
+            <p style="font-style:unset">डी.जी.आर</p>
+        </div>
+    </div>
+</div>

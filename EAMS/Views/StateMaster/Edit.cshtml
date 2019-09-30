@@ -1,0 +1,56 @@
+﻿@model EAMS.View_Models.StateMasterVM
+
+@{
+    ViewBag.Title = "State Update";
+}
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to Update State and Union Territorie</span>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "StateMaster")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.StateId)
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 offset-0">
+                                <div class="form-group">
+                                    <button type="submit" value="Save" class="btn btn-primary m-b-0"><i class="fa fa-save"></i> Update </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<EAMS.View_Models.ESMOfficersDetailVM>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">            
+            <h3 style="text-align:right">File No. 0515/NAC/DGR/Emp-3/@DateTime.Now.Year</h3>
+
+            <p>1.	 The following vacancies have been received from the various organization (PUC):-</p>
+
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Service No., Rank & name</th>
+                            <th>DGR Regn no.</th>
+                            <th>Reg for Scheme</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EsmId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceNo),&nbsp;@Html.DisplayFor(modelItem => item.Ranks.RankName),&nbsp;
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DgrRegistrationNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <p>2.    The above mentioned vacancies were uploaded on the DGR website but no officer is willing for the job.   Now, the above said organization(s) have requested for issuance of NAC. Hence, it is suggested that NAC may be issued.</p>
+
+            <p>3.    Draft NAC is placed opposite for perusal and approval please.</p>
+
+            <p style="text-align:right">(कल्पना मिश्रा) <br />उप निदेशक /रोज़गार-III <br />@DateTime.Now.ToShortDateString()</p>
+            <br />
+            <br />
+            <br />
+            <p>पी.डी</p>
+            <br />
+            <br />
+            <br />
+            <p style="font-style:unset">डी.जी.आर</p>
+        </div>
+    </div>
+</div>
+
+

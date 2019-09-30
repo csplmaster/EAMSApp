@@ -1,0 +1,16 @@
+using System.Data.Entity;
+using Devtalk.EF.CodeFirst;
+using EAMS.DB_Contexts;
+
+[assembly: WebActivator.PreApplicationStartMethod(typeof(EAMS.App_Start.DontDropDbJustCreateTablesIfModelChangedStart), "Start")]
+
+namespace EAMS.App_Start {
+    public static class DontDropDbJustCreateTablesIfModelChangedStart {
+        public static void Start() {
+            // Uncomment this line and replace CONTEXT_NAME with the name of your DbContext if you are 
+            // using your DbContext to create and manage your database
+            // Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<CONTEXT_NAME>());
+            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<EAMSContext>());
+        }
+    }
+}

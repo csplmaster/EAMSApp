@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EAMS.View_Models.EmployerDetailsIndxVM>
+@using NonFactors.Mvc.Grid
+
+    @(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Companys.CompanyName).Titled("Company");
+        columns.Add(model => model.Branch).Titled("Branch");
+
+        columns.Add(model => model.PersonName).Titled("Person Name");
+        columns.Add(model => model.PersonDesignation).Titled("Designation");
+        columns.Add(model => model.PersonEmailId).Titled("Email");
+
+        columns.Add(model => model.FaxNo).Titled("Fax");
+        columns.Add(model => model.ContactNo).Titled("Contact");
+        columns.Add(model => model.EmailId).Titled("Email");
+        columns.Add(model => model.PhoneNo).Titled("Phone No");
+
+        columns.Add(model => model.PinCode).Titled("Pin Code");
+        columns.Add(model => model.FullAddress).Titled("Full Address");
+        columns.Add(model => model.States.StateName).Titled("State");
+        columns.Add(model => model.Citys.CityName).Titled("City");
+
+        columns.Add()
+        .Titled("Edit")
+        .RenderedAs(o => Html.ActionLink("Edit", "Edit", new { id = o.EmployerId }));
+        columns.Add()
+        .Titled("Delete")
+        .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.EmployerId }));
+    })
+    .UsingFilterMode(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 2;
+        pager.RowsPerPage = 10;
+    })
+    .Filterable()
+    .Sortable()
+    )

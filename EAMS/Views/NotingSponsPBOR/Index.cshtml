@@ -1,0 +1,140 @@
+﻿@*@model IEnumerable <EAMS.View_Models.ESMJcoIndexVM>*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <h3 style="text-align:right">File No. 0515/DGR/Emp-3/Panel/@DateTime.Now.Year</h3>
+
+            <p>1.	Requisitions have been received from various organizations for various posts. The vacancies were posted on the DGR website for wide publicity and were also forwarded to all the Rajya Sainik Boards allowing Ex-servicemen sufficient time for responding.</p>
+
+            <p>2.	Accordingly, panel of Ex-Servicemen as received from various ZSBs/RSBs pan India have been compiled and draft panels of ESM are given as under for various posts, for approval / directions:-</p>
+                        
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Govt./PSUs/Pvt.</th>
+                            <th>Post</th>
+                            <th>Vacancies</th>
+                            <th>No. of ESM being sponsored</th>
+                            <th>Panel No.</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>(a)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(b)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(c)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(d)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(e)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(f)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(g)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(h)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @*@foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EsmId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceNo),&nbsp;@Html.DisplayFor(modelItem => item.Ranks.RankName),&nbsp;
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DgrRegistrationNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }*@
+                    </tbody>
+                </table>
+            </div>
+            <p>3.	If approved, the panel of Ex-Servicemen will be forwarded to various user organizations as given above.</p>
+            <br />
+            <br />
+            <br />
+            <p style="text-align:right">(कल्पना मिश्रा) <br />उप निदेशक /रोज़गार-III <br />@DateTime.Now.ToShortDateString()</p>
+            <br />
+            <br />
+            <br />
+            <p>पी.डी</p>
+            <br />
+            <br />
+            <br />
+            <p style="font-style:unset">डी.जी.आर</p>
+        </div>
+    </div>
+</div>

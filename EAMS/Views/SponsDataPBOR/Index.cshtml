@@ -1,0 +1,87 @@
+﻿@model IEnumerable<EAMS.View_Models.PBORsponserDetailsIndxVM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <h3 style="text-align:center"><strong><span style="text-decoration:underline"> COMPLETE SPONSORSHIP DETAILS OF JCOS/OR SPONSORED</span></strong></h3>
+            <br />
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ser No</th>
+                            <th>Panel No.</th>
+                            <th>Name of the Organisation</th>
+                            <th>Contact Person</th>
+                            <th>Designation</th>
+                            <th>Address</th>
+                            <th>Post</th>
+                            <th>No. of Vacancies</th>
+                            <th>No. of ESM Sponsored</th>
+                            <th>Date of Sponsorship</th>
+                            <th>Contact Details/ E-mail ID</th>
+                            <th>Feedback</th>
+                            <th>Whether NAC issued</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SponsorshipId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.panelNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Companies.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactPersonName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Designation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Post)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalVacancy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalESMSponsered)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SponserDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNo) @Html.DisplayText(" / ") @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FeedBack)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NACIssued)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remarks)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

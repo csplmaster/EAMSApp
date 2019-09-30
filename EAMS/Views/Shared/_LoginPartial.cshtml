@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+    <li class="user-profile header-notification">
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <a href="javascript:void()">
+                    <img src="../../Content//images/user.png" alt="User-Profile-Image">
+                    <span>@User.Identity.GetUserName()</span>
+                    <i class="ti-angle-down"></i>
+                </a>
+                <ul class="show-notification profile-notification">
+                    <li>
+                        <i class="ti-lock"></i>
+                        @Html.ActionLink("Change Password", "ChangePassword", "Manage")
+                    </li>
+                    <li>
+                        <i class="ti-layout-sidebar-left"></i>
+                        <a href="javascript:document.getElementById('logoutForm').submit()"> Log off</a>
+                    </li>
+                </ul>
+            }
+        }
+        else
+        {
+            <a href="javascript:void()">
+                <img src="../../Content//images/user.png" alt="User-Profile-Image">
+                <span>Accounts</span>
+                <i class="ti-angle-down"></i>
+            </a>
+            <ul class="show-notification profile-notification">
+                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        }
+    </li>

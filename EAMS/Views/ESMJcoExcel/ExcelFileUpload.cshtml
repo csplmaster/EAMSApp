@@ -1,0 +1,109 @@
+﻿@model EAMS.View_Models.ESMJcoExcelUploadVM
+
+@{
+    ViewBag.Title = "Officers/JCOs/OR Details Import";
+}
+
+@{
+    if (ViewBag.Result != null)
+    {
+        @ViewBag.Result;
+    }
+}
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to Add Officers/JCOs/OR Details from Excel files</span>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("ExcelFileUpload", "ESMJcoExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.ServiceType, htmlAttributes: new { @class = "control-label" })
+                                    <div class='form-group'>
+                                        @Html.RadioButtonFor(model => model.ServiceType, "Jco") JCOs/OR
+                                        &nbsp; &nbsp;
+                                        @Html.RadioButtonFor(model => model.ServiceType, "Offr") Officers
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.CompanyId, "Company", htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.VacancyId, "Vacancy", htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownList("VacancyId", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.VacancyId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.SbId, "Sainik Board", htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownList("SbId", (IEnumerable<SelectListItem>)ViewBag.SainikBoards, null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SbId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.files, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple", @name = "files", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 offset-0">
+                                <div class="form-group">
+                                    <button type="submit" value="Save" class="btn btn-primary m-b-0"><i class="fa fa-save"></i> Import Excel </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CompanyId").change(function () {
+                $("#VacancyId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetJobPosts")',
+                    dataType: 'json',
+                    data: { companyid: $("#CompanyId").val() },
+                    success: function (jobpostsdata) {
+                        //$("#CityId").append('<option value="' + "0" + '">' + "Select" + '</option>');
+                        $.each(jobpostsdata, function (i, posts) {
+                            $("#VacancyId").append('<option value="' + posts.Value + '">' + posts.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Job Posts Data.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+}

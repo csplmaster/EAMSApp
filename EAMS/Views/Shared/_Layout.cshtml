@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Automation of EMPLOYMENT -III</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="EAMS Software Package">
+    <meta name="keywords" content="Employment, ESM, Noting, EMPLOYMENT -III, Panel Creation, Noting Creation, App, Sponsorship, Resettlement, DGR, RSB, ZSB, JCO, Other Ranks, Officer">
+    <meta name="author" content="Createch Software Pvt. Ltd.">
+    <!-- Favicon icon -->
+    <link rel="icon" href="/Content/images/icons/favicon.ico" type="image/x-icon">
+
+
+    @Styles.Render("~/Content/eamscss")
+    @Scripts.Render("~/bundles/modernizer")
+
+    @*@Styles.Render("~/Content/themify")
+    @Styles.Render("~/Content/iconfont")
+    @Styles.Render("~/Content/flagicon")*@
+
+    <link rel="stylesheet" type="text/css" href="../../Content//icon/themify-icons/themify-icons.css">
+        <!-- ico font -->
+        <link href="~/Content/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="../../Content//icon/icofont/css/icofont.css">
+        <!-- flag icon framework css -->
+        <link rel="stylesheet" type="text/css" href="../../Content//pages/flag-icon/flag-icon.min.css">
+
+
+
+    @Styles.Render("~/Content/menusearch")
+    @Styles.Render("~/Content/horizontaltimeline")
+    @Styles.Render("~/Content/eamsamchart")
+    @Styles.Render("~/Content/styles")
+    @Styles.Render("~/Content/eamscolor")
+    @Styles.Render("~/Content/EamsDataTables")
+    @Styles.Render("~/Content/MultiSelect")
+</head>
+<body class="header-fixed">
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div></div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <!-- Menu header start -->
+    <nav class="navbar header-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-logo">
+                <a class="mobile-menu" id="mobile-collapse" href="#!">
+                    <i class="ti-menu"></i>
+                </a>
+                <a class="mobile-search morphsearch-search" href="#">
+                    <i class="ti-search"></i>
+                </a>
+                <a href="@Url.Action("Index", "Home")">
+                    <img class="img-fluid" src="/Content//images/logo.png" alt="Theme-Logo" />
+                </a>
+                <a class="mobile-options">
+                    <i class="ti-more"></i>
+                </a>
+            </div>
+            <div class="navbar-container container-fluid">
+                <div>
+                    <ul class="nav-left">
+                        <li>
+                            <a id="collapse-menu" href="#">
+                                <i class="ti-menu"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="main-search morphsearch-search" href="#">
+                                <!-- themify icon -->
+                                <i class="ti-search"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#!" onclick="javascript:toggleFullScreen()">
+                                <i class="ti-fullscreen"></i>
+                            </a>
+                        </li>
+                        <li class="mega-menu-top">
+                            <a href="#">
+                                Actions<i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification row">
+                                <li class="col-sm-3">
+                                    <h6 class="mega-menu-title">SETTINGS</h6>
+                                    <ul class="mega-menu-links">
+                                        <li><a href="@Url.Action("Index", "RankMaster")">Ranks</a></li>
+                                        <li><a href="@Url.Action("Index", "StateMaster")">States</a></li>
+                                        <li><a href="@Url.Action("Index", "CityMaster")">City/Distt</a></li>
+                                        <li><a href="@Url.Action("Index", "CompanyMaster")">Company Data</a></li>
+                                        <li><a href="@Url.Action("Index", "QualificationMaster")">Qualifications</a></li>
+
+                                        <li><a href="@Url.Action("Index", "SainikBoardDetail")">Sainik Boards</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <h6 class="mega-menu-title">DATA ENTRY</h6>
+                                    <ul class="mega-mailbox">
+                                        <li><a href="@Url.Action("Index", "VacancyMaster")">Vacancy Entry</a></li>
+                                        <li><a href="@Url.Action("Index","RegistrationEMPOffrs")">Before Retirement Officers</a></li>
+                                        <li><a href="@Url.Action("Index","RegistrationEAMSJcosDetail")">Before Retirement JCOs/OR</a></li>
+                                        <li><a href="@Url.Action("Index", "ESMOfficers")">Officer Entry</a></li>
+                                        <li><a href="@Url.Action("Index", "ESMJcoORsDetail")">JCOs/OR Entry</a></li>
+                                        <li><a href="@Url.Action("ExcelFileUpload", "ESMJcoExcel")">Excel Upload</a></li>
+                                        <li><a href="@Url.Action("Index","SponsorDataDetails")">Sponsorship Panel</a> </li>
+                                        <li><a href="@Url.Action("Index","OutcomeDetails")">Sponsorship Outcome</a> </li>
+
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <h6 class="mega-menu-title">Officers Report</h6>
+                                    <ul class="mega-mailbox">
+                                        <li><a href="@Url.Action("Index", "MonthlyPMOOffrs")">Monthly PMO Data</a></li>
+                                        <li><a href="@Url.Action("Index", "MonthlySponsershipOffrs")">Monthly Sponsership Details</a></li>
+                                        <li><a href="@Url.Action("Index", "NACPrincpalEmployerOffr")">NAC for Principal Employer</a></li>
+                                        <li><a href="@Url.Action("Index", "TotalESMOfficers")">Total No. of ESM Sponsored</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingNACOfficer")">Noting for NAC</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingSponsAddlOfficer")">Noting for Sponsership Additional</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingSponsOfficer")">Noting for Sponsership</a></li>
+                                        <li><a href="@Url.Action("Index", "OutComeSponsorship")">Outcome Sponsership</a></li>
+                                        <li><a href="@Url.Action("Index", "SponsDataOffrs")">Sponsorship data</a></li>
+                                        <li><a href="@Url.Action("Index", "PanelGovtContract")">Sponsorship Panel (Government)</a></li>
+                                        <li><a href="@Url.Action("Index", "PanelPrivate")">Sponsorship Panel (Private)</a></li>
+                                        <li><a href="@Url.Action("Index", "WeeklyDataOffrs")">Weekly Data</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <h6 class="mega-menu-title">JCOs/OR Report</h6>
+                                    <ul class="mega-mailbox">
+                                        <li><a href="@Url.Action("Index", "MonthlyPMOPBOR")">Monthly PMO Data</a></li>
+                                        <li><a href="@Url.Action("Index", "MonthlySponsershipPBOR")">Monthly Sponsership Details</a></li>
+                                        <li><a href="@Url.Action("Index", "NACPrincpalEmployerJCO")">NAC for Principal Employer</a></li>
+                                        <li><a href="@Url.Action("Index", "TotalESMJCO")">Total No. of ESM Sponsored</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingNACJCO")">Noting for NAC</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingSponsAddlOfficer")">Noting for Sponsership Additional</a></li>
+                                        <li><a href="@Url.Action("Index", "NotingSponsPBOR")">Noting for Sponsership</a></li>
+                                        <li><a href="@Url.Action("Index", "OutComeSponsorship")">Outcome Sponsership</a></li>
+                                        <li><a href="@Url.Action("Index", "SponsDataPBOR")">Sponsorship data</a></li>
+                                        <li><a href="@Url.Action("Index", "PanelGovtContract")">Sponsorship Panel (Contract)</a></li>
+                                        <li><a href="@Url.Action("Index", "PanelGovtPermanent")">Sponsorship Panel (Permanent)</a></li>
+                                        <li><a href="@Url.Action("Index", "PanelPrivate")">Sponsorship Panel (Private)</a></li>
+                                        <li><a href="@Url.Action("Index", "WeeklyDataPBOR")">Weekly Data</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav-right">
+                        @*<li class="header-notification">
+    <a href="#!">
+        <i class="ti-bell"></i>
+        <span class="badge">1</span>
+    </a>
+    <ul class="show-notification">
+        <li>
+            <h6>Notifications</h6>
+            <label class="label label-danger">New</label>
+        </li>
+       <li>
+            <div class="media">
+                <img class="d-flex align-self-center" src="../../Content//images/user.png" alt="Generic placeholder image">
+                <div class="media-body">
+                    <h5 class="notification-user">Admin</h5>
+                    <p class="notification-msg">Being Updated...</p>
+                    <span class="notification-time">30 minutes ago</span>
+                </div>
+            </div>
+        </li>
+                            </ul>
+                        </li>*@
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                    <!-- search -->
+                    <div id="morphsearch" class="morphsearch">
+                        <form class="morphsearch-form">
+                            <input class="morphsearch-input" type="search" placeholder="Search..." />
+                            <button class="morphsearch-submit" type="submit">Search</button>
+                        </form>
+                        <div class="morphsearch-content">
+                            <div class="dummy-column">
+                                <h2>People</h2>
+                                <a class="dummy-media-object" href="#!">
+                                    <img class="round" src="http://0.gravatar.com/avatar/81b58502541f9445253f30497e53c280?s=50&amp;d=identicon&amp;r=G" alt="Sara Soueidan" />
+                                    <h3>Sara Soueidan</h3>
+                                </a>
+                                <a class="dummy-media-object" href="#!">
+                                    <img class="round" src="http://1.gravatar.com/avatar/9bc7250110c667cd35c0826059b81b75?s=50&amp;d=identicon&amp;r=G" alt="Shaun Dona" />
+                                    <h3>Shaun Dona</h3>
+                                </a>
+                            </div>
+                            <div class="dummy-column">
+                                <h2>Popular</h2>
+                                <a class="dummy-media-object" href="#!">
+                                    <img src="../../Content//images/avatar-1.png" alt="PagePreloadingEffect" />
+                                    <h3>Page Preloading Effect</h3>
+                                </a>
+                                <a class="dummy-media-object" href="#!">
+                                    <img src="../../Content//images/avatar-1.png" alt="DraggableDualViewSlideshow" />
+                                    <h3>Draggable Dual-View Slideshow</h3>
+                                </a>
+                            </div>
+                            <div class="dummy-column">
+                                <h2>Recent</h2>
+                                <a class="dummy-media-object" href="#!">
+                                    <img src="../../Content//images/avatar-1.png" alt="TooltipStylesInspiration" />
+                                    <h3>Tooltip Styles Inspiration</h3>
+                                </a>
+                                <a class="dummy-media-object" href="#!">
+                                    <img src="../../Content//images/avatar-1.png" alt="NotificationStyles" />
+                                    <h3>Notification Styles Inspiration</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /morphsearch-content -->
+                        <span class="morphsearch-close"><i class="icofont icofont-search-alt-1"></i></span>
+                    </div>
+                    <!-- search end -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Menu header end -->
+    <!-- Menu aside start -->
+    <div class="main-menu">
+
+        <div class="main-menu-content">
+            <ul class="main-navigation">
+                <li class="nav-item has-class">
+                    <a href="#!">
+                        <i class="ti-home"></i>
+                        <span data-i18n="nav.dash.main">Admin Settings</span>
+                    </a>
+                    <ul class="tree-1 has-class">
+                        <li class="has-class">
+                            <a href="@Url.Action("Index", "StateMaster")"> States </a>
+                        </li>
+                        <li><a href="@Url.Action("Index", "CityMaster")"> City/Districts</a></li>
+                        <li><a href="@Url.Action("Index", "CompanyMaster")">Company/PSU</a></li>
+                        <li><a href="@Url.Action("Index", "EmployerDetails")">Company Details</a></li>
+                        <li><a href="@Url.Action("Index", "QualificationMaster")">Qualifications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#!">
+                        <i class="ti-layout"></i>
+                        <span data-i18n="nav.page_layout.main">Data Entry</span>
+                        <label class="label label-warning menu-caption">Data</label>
+                    </a>
+                    <ul class="tree-1">
+                        <li class="nav-sub-item">
+                            <a href="#" data-i18n="nav.page_layout.vertical.main">
+                                <i class="icon-arrow-right"></i>Vacancies
+                            </a>
+                            <ul class="tree-2">
+                                <li>
+                                    <a href="@Url.Action("Index", "VacancyMaster")">Enter Vacancies</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "ESMOfficers")">
+                                        ESM Officer Entry
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "ESMJCOORSDetails")">
+                                        ESM PBORs Entry
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-sub-item">
+                            <a href="#"> Panel Selection </a>
+                            <ul class="tree-2">
+                                <li><a href="#" target="_blank"> Create </a></li>
+                                <li><a href="#" target="_blank"> Update </a></li>
+                                <li><a href="#" target="_blank"> View </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#!">
+                        <i class="ti-layout"></i>
+                        <span data-i18n="nav.page_layout.main">Reports</span>
+                        <label class="label label-warning menu-caption">Query</label>
+                    </a>
+                    <ul class="tree-2">
+                        <li><a href="#">Forwarding Sponsorship letter</a></li>
+                        <li><a href="#">Monthly PMO Data</a></li>
+                        <li><a href="#">Monthly Sponsorship Details for Website</a></li>
+                        <li><a href="#">NAC for Principal Employer</a></li>
+                        <li><a href="#">No. Of ESM Sponsored Monthly Quarterly Yearly Data</a></li>
+                        <li><a href="#">Noting for NAC</a></li>
+                        <li><a href="#">Noting For Sponsorship of ESM</a></li>
+                        <li><a href="#">Outcome of Sponsorship Letters</a></li>
+                        <li><a href="#">Sponsorship Data</a></li>
+                        <li><a href="#">Sponsorship Panel Format - Govt Contractual</a></li>
+                        <li><a href="#">Sponsorship Panel Format - Govt Permanent</a></li>
+                        <li><a href="#">Sponsorship Panel Format - Private</a></li>
+                        <li><a href="#">Weekly Data</a></li>
+                    </ul>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- Menu aside end -->
+    <!-- Main-body start-->
+
+    <div class="main-body">
+        @RenderBody()
+        <hr />
+        <footer>
+            
+
+                <p style="color:#000">&copy; @DateTime.Now.Year - Directorate General of Resettlement</p>
+                
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jqueryb")
+    @Scripts.Render("~/bundles/jqueryslimscroll")
+    @Scripts.Render("~/bundles/eamsmisc")
+    @Scripts.Render("~/Script/EamsDataTables")
+    @Scripts.Render("~/Script/MultiSelect")
+
+    @RenderSection("DataTableScript", required: false)
+    @RenderSection("scripts", required: false)
+    @RenderSection("featured",required: false)
+     
+</body>
+
+</html>

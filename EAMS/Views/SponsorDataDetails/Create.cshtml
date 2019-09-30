@@ -1,0 +1,242 @@
+﻿@model EAMS.View_Models.SponsorDataCreateVM
+
+@{
+    ViewBag.Title = "Sponsorship Detail";
+
+}
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to make sponsorship</span>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "SponsorDataDetails")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class='col-sm-3'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.PanelNo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PanelNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PanelNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-2'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.PersonType, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.PersonType, new List<SelectListItem> { new SelectListItem { Text = "Officers", Value = "O" }, new SelectListItem { Text = "JCOs/OR", Value = "J" } }, "--Select--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PersonType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-4'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-3'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.VacancyId, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("VacancyId", new SelectList(string.Empty, "Value", "Text"), "--Select Post--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.VacancyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-2'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.NoofVacancy, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.NoofVacancy, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NoofVacancy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-2'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.NoofEAMSSponsor, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.NoofEAMSSponsor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NoofEAMSSponsor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class='col-sm-2'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.SponsorShipDate, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.SponsorShipDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SponsorShipDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class='col-sm-2'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.Feedback, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Feedback, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Feedback, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-1'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.IsNACIssued, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.IsNACIssued, new List<SelectListItem> { new SelectListItem { Text = "Yes", Value = "Yes" }, new SelectListItem { Text = "No", Value = "No" } }, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IsNACIssued, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-3'>
+                            <div class='form-group'>
+                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class='col-sm-12'>
+                            <div class="table-responsive-lg">
+                                <table class="table table-bordered" id="tblPerson">
+                                    <thead class="thead-success">
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" value="All" id="chkAll" checked />
+                                            </th>
+                                            <th>Service No</th>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Date of Birth</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                <button type="submit" value="Save" class="btn btn-primary m-b-0"><i class="fa fa-save"></i> Save </button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#chkAll").click(function () {
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            });
+
+        });
+        $(document).ready(function () {
+            $("#CompanyId").change(function () {
+                $("#VacancyId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetJobPosts")',
+                    dataType: 'json',
+                    data: { companyid: $("#CompanyId").val() },
+                    success: function (jobpostsdata) {
+                        $("#VacancyId").append('<option value="' + "0" + '">' + "--Select Post--" + '</option>');
+                        $.each(jobpostsdata, function (i, posts) {
+                            $("#VacancyId").append('<option value="' + posts.Value + '">' + posts.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Job Posts Data.' + ex);
+                    }
+                });
+                return false;
+            })
+
+            var today = new Date();
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd M yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0",
+                autoclose: true,
+                endDate: "today",
+                maxDate: today
+            });
+        });
+        $(document).ready(function () {
+            $("#VacancyId").change(function () {
+                fnPopPersons();
+                //return false;
+            })
+            //$('#SponsorShipDate').datepicker({
+            //onSelect: function (value, ui) {
+            //    var today = new Date(),
+            //        age = today.getFullYear() - ui.selectedYear;
+            //    //$('#age').text(age);
+            //    if (age > 59) {
+            //        alert("Your age exceeds the maximum allowed criteria.");
+            //        $('#btnNxt').hide();
+            //    } else $('#btnNxt').show();
+            //},
+            //dateFormat: "dd M yy",
+            //changeMonth: true,
+            //changeYear: true,
+            //yearRange: '-59:-18',
+        //});
+        });
+        function fnPopPersons() {
+            $("#mydrop").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetEAMSDetail")',
+                dataType: 'json',
+                data: { vacancyId: $("#VacancyId").val(),PersonType: $("#PersonType").val() },
+                success: function (esmdata) {
+                    var tablesTb = $('#tblPerson tbody');;
+                    tablesTb.empty();
+                    $.each(esmdata, function (i, esm) {
+                        var date = new Date(parseInt(esm.DateofBirth.substr(6)));
+                        var dob = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                        tablesTb.append('<tr><td> <input type="checkbox" name="SelChkEsmIds" id="chkEsmId" value = "'+esm.EsmId+'" checked /></td><td>' + esm.ServiceNo + '</td><td>' + esm.RankName +'</td><td>' + esm.Name + '</td><td>' + dob + '</td></tr>');
+                    });
+                },
+                error: function (xhr, status, err) {
+                    alert(status.toString(), err.toString());
+                }
+                //error: function (ex) {
+                //    alert('Failed to retrieve EAMS Data.' + ex);
+                //}
+            });
+        }
+        function OnError(xhr, errorType, exception) {
+            var responseText;
+            responseText = jQuery.parseJSON(xhr.responseText);
+            alert(responseText.ExceptionType + "</br>" + responseText.StackTrace + "</br>" + responseText.Message);
+                //$("#dialog").html("");
+                //try {
+                //    responseText = jQuery.parseJSON(xhr.responseText);
+                //    $("#dialog").append("<div><b>" + errorType + " " + exception + "</b></div>");
+                //    $("#dialog").append("<div><u>Exception</u>:<br /><br />" + responseText.ExceptionType + "</div>");
+                //    $("#dialog").append("<div><u>StackTrace</u>:<br /><br />" + responseText.StackTrace + "</div>");
+                //    $("#dialog").append("<div><u>Message</u>:<br /><br />" + responseText.Message + "</div>");
+                //} catch (e) {
+                //    responseText = xhr.responseText;
+                //    $("#dialog").html(responseText);
+                //}
+                //$("#dialog").dialog({
+                //    title: "jQuery Exception Details",
+                //    width: 700,
+                //    buttons: {
+                //        Close: function () {
+                //            $(this).dialog('close');
+                //        }
+                //    }
+                //});
+            }
+
+    </script>
+}

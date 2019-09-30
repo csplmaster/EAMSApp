@@ -1,0 +1,193 @@
+﻿@model EAMS.View_Models.ESMJcoCrtVM
+
+@{
+    ViewBag.Title = "Create Vacancy for JCO/ORs";
+}
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>This page is used to create vacancy state for JCO/ORs</span>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "CityMaster")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.CompanyId, "Company", htmlAttributes: new { @class = "control-label" })
+                                    @*@Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })*@
+                                    @Html.DropDownList("CompanyId", (IEnumerable<SelectListItem>)ViewBag.Companies, null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.SbId, "Sainik", htmlAttributes: new { @class = "control-label" })
+                                    @*@Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })*@
+                                    @Html.DropDownList("Sbid", (IEnumerable<SelectListItem>)ViewBag.Sainik, null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SbId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class="form-group">
+                                    <label for="VacancyId">Post/Vacancy</label>
+                                    @Html.DropDownList("VacancyId", new SelectList(string.Empty, "Value", "Text"), "--Select Post--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.VacancyId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>    
+                            <div class='col-sm-2'>
+                                <div class='form-group'>
+                                    <label for="ServiceType">Service</label>
+                                    @Html.DropDownListFor(model => model.ServiceType, new List<SelectListItem> { new SelectListItem { Text = "Army", Value = "Army" }, new SelectListItem { Text = "Air Force", Value = "Air Force" }, new SelectListItem { Text = "Navy", Value = "Navy" } }, "--Select--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RankId, "Rank", htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownList("RankId", new SelectList(string.Empty, "Value", "Text"), "--Select Service--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.RankId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Name" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-2'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.DateofBirth, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.DateofBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DateofBirth, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Corps, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Corps, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Corps, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-2'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.Trade, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Trade, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Trade, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-2'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                     @Html.LabelFor(model => model.QualificationId, "Qualification", htmlAttributes: new { @class = "control-label" })
+                                     @Html.DropDownList("QualificationId", (IEnumerable<SelectListItem>)ViewBag.Qualification, null, htmlAttributes: new { @class = "form-control" })
+                                     @Html.ValidationMessageFor(model => model.QualificationId, "", new { @class = "text-danger" })
+                                            </div>
+                            </div>
+                            <div class='col-sm-5'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.WorkExp, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.WorkExp, new { htmlAttributes = new { @class = "form-control", placeholder = "Exp in Year" } })
+                                    @Html.ValidationMessageFor(model => model.WorkExp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-6'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Full Address" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile No" } })
+                                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class='col-sm-3'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", placeholder = "abc@xyz.com" } })
+                                    @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 offset-0">
+                                <div class="form-group">
+                                    @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                    <button type="submit" value="Save" class="btn btn-primary m-b-0"><i class="fa fa-save"></i> Save </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+            $(document).ready(function () {
+                $("#CompanyId").change(function () {
+                    $("#VacancyId").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetJobPosts")',
+                        dataType: 'json',
+                        data: { companyid: $("#CompanyId").val() },
+                        success: function (jobpostsdata) {
+                            $("#VacancyId").append('<option value="' + "0" + '">' + "--Select Post--" + '</option>');
+                            $.each(jobpostsdata, function (i, posts) {
+                                $("#VacancyId").append('<option value="' + posts.Value + '">' + posts.Text + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve Job Posts Data.' + ex);
+                        }
+                    });
+                    return false;
+                });
+                $("#ServiceType").change(function () {
+                    $("#RankId").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'GetRanks',
+                        dataType: 'json',
+                        data: { ServiceType: $("#ServiceType").val() },
+                        success: function (rankdata) {
+                            $.each(rankdata, function (i, ranks) {
+                                $("#RankId").append('<option value="' + ranks.Value + '">' + ranks.Text + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve ranks.' + ex);
+                        }
+                    });
+                    return false;
+                });
+        });
+
+    </script>
+}

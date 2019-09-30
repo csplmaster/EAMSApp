@@ -1,0 +1,28 @@
+﻿@model IEnumerable<EAMS.View_Models.RankMasterVM>
+@using NonFactors.Mvc.Grid
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.RankName).Titled("RankName");
+            columns.Add()
+            .Titled("Edit")
+            .RenderedAs(o => Html.ActionLink("Edit", "Edit", new { id = o.RankId }));
+            columns.Add()
+            .Titled("Delete")
+            .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.RankId }));
+            columns.Add()
+            .Titled("Dele2")
+            .RenderedAs(o => Html.ActionLink("Delete", "Delete", new { id = o.RankId }, new { onclick = "return confirm('Are you sure you wish to delete this record?');" }));
+        })
+        .UsingFilterMode(GridFilterMode.Excel)
+        .Empty("No data found")
+        .Id("my-ajax-grid")
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 2;
+            pager.RowsPerPage = 10;
+        })
+        .Filterable()
+        .Sortable()
+)
