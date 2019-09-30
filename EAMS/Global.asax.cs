@@ -17,7 +17,7 @@ namespace EAMS
 
             EAMSAutomapWebProfile.Run();
             GlobalFilters.Filters.Add(new CSPLErrorHandler());
-            //Make hanges
+            //Make another changes
         }
     }
 }
