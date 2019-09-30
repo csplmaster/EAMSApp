@@ -1,125 +1,133 @@
 ﻿@model EAMS.View_Models.SainikBoardCreateVM
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Sainik Board Details Create";
 }
-<h2>Sainik Board Entry</h2>
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                    <span>
+                        This page is used to Add Officer's details
+                    </span>
+                    <div class="card-header-right">
+                        <i class="icofont icofont-rounded-down"></i>
+                        <a href="@Url.Action("Index", "SainikBoardDetail")" title="Click here to close this form"><i class="icofont icofont-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="card-block">
+                        <div class="row">
+                            <div class='col-sm-3'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.SbType, htmlAttributes: new { @class = "control-label col-md-6" })
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class='form-group'>
+                                    @Html.RadioButtonFor(model => model.SbType, "Rajya")Rajya
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "Zila")Zila
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "IAFPC")IAFPC
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "DESA")DESA
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "DIAV")DIAV
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "AWPO")AWPO
+                                    &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(model => model.SbType, "Kendriya")Kendriya
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.LabelFor(model => model.SbName, htmlAttributes: new { @class = "control-label col-md-6" })
+                                        @Html.EditorFor(model => model.SbName, new { htmlAttributes = new { placeholder = "Sainik Board", @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SbName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { placeholder = "Description", @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col-sm-3'>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PersonName, htmlAttributes: new { @class = "control-label col-md-6" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.PersonName, new { htmlAttributes = new { placeholder = "Person Name", @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PersonName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-4" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { placeholder = "9876543210", @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col-sm-3'>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-6" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "abc@xyz.com", @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 offset-0">
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="card-block">        
-                    <div class="row">
-                        <div class='col-sm-3'>
-                            <div class='form-group'>
-                                @Html.LabelFor(model => model.SbType, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class='form-group'>
-                                @Html.RadioButtonFor(model => model.SbType, "Rajya")Rajya
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "Zila")Zila
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "IAFPC")IAFPC
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "DESA")DESA
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "DIAV")DIAV
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "AWPO")AWPO
-                                &nbsp; &nbsp;
-                                @Html.RadioButtonFor(model => model.SbType, "Kendriya")Kendriya
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class='col-sm-3'>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.SbName, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.SbName, new { htmlAttributes = new { placeholder = "Sainik Board", @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.SbName, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { placeholder = "Description", @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class='col-sm-3'>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PersonName, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.PersonName, new { htmlAttributes = new { placeholder = "Person Name", @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PersonName, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-4" })
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { placeholder = "9876543210", @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class='col-sm-3'>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "abc@xyz.com", @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-9 offset-0">
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
             </div>
-            }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
