@@ -10,7 +10,7 @@ namespace EAMS
         {
             ConfigureAuth(app);
             //changed by ajay
-            //changed by Cp
+            //changed by Ankit
         }
     }
 }
