@@ -1,0 +1,32 @@
+﻿@*@model IEnumerable<EAMS.Models.QualificationMaster>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta name="viewport" content="width=device-width" />
+
+        <title>Index</title>
+
+    </head>
+
+    <body>
+        <div>
+            <h2>PBOR Details Import</h2>
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <input name="file" type="file" required />
+                    <button type="submit">Import</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+

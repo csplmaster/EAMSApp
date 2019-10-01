@@ -110,8 +110,7 @@
                             <div class='col-sm-2'>
                                 <div class='form-group'>
                                     @Html.LabelFor(model => model.LastDate, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.LastDate, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.TextBoxFor(m => m.LastDate, new { @Value = Model.LastDate.ToString("dd/mm/yyyy") })
+                                    @Html.EditorFor(model => model.LastDate, new { htmlAttributes = new { placeholder = "Last Date", @class = "form-control", @type = "date" } })
                                     @Html.ValidationMessageFor(model => model.LastDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -158,13 +157,7 @@
                                     @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class='col-sm-3'>
-                                <div class='form-group'>
-                                    @Html.LabelFor(model => model.ModeOfApplication, "Mode Of Application", htmlAttributes: new { @class = "control-label" })
-                                    @Html.EnumDropDownListFor(model => model.ModeOfApplication, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.ModeOfApplication, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+
                             <div class='col-sm-3'>
                                 <div class='form-group'>
                                     <label class="control-label">Select Desirable Qualification</label>
@@ -203,6 +196,14 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class='col-sm-3'>
+                                <div class='form-group'>
+                                    @Html.LabelFor(model => model.ModeOfApplication, "Mode Of Application", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EnumDropDownListFor(model => model.ModeOfApplication, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ModeOfApplication, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-9 offset-0">
@@ -233,7 +234,9 @@
     });
 
     $(document).ready(function () {
-        bindCity();
+        if ('@ViewData["SelectedCity"]' != null) {
+            bindCity();
+        }
     });
     $(document).ready(function () {
         $("#StateId").change(function () {
@@ -242,6 +245,7 @@
             return false;
         })
     });
+
 
     function bindCity() {
             $.ajax({
@@ -254,7 +258,7 @@
                     $.each(citydata, function (i, city) {
                         $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
                     });
-                    if (@ViewData["SelectedCity"] != 0) {
+                    if ('@ViewData["SelectedCity"]' != 0) {
                         $("#CityId").val('@ViewData["SelectedCity"]');
                     }
                 },
